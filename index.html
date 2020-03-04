@@ -104,7 +104,8 @@
                 let date = new Date();
                 let dateFormat = formatDate(date);
 
-                document.querySelector('.log').innerHTML = 'log: ' + dateFormat;
+                document.querySelector('.log').innerHTML =
+                    'log: v1 ' + dateFormat;
                 document.querySelector('.log').style.filter =
                     'hue-rotate(' + date.getSeconds() + 'rad)';
             })();
