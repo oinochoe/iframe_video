@@ -79,6 +79,7 @@
                     videoId: _videoID,
                     events: {
                         onStateChange: onPlayerStateChange,
+                        onPlayerReady: onPlayerReady,
                     },
                     playerVars: {
                         autohide: 1,
@@ -94,12 +95,16 @@
                 });
             }
 
+            function onPlayerReady(event) {
+                _player.playVideo();
+            }
+
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.PLAYING && !_done) {
                     _done = true;
-                    // setTimeout(() => {
-                    //     _player.unMute();
-                    // }, 5400);
+                    setTimeout(() => {
+                        _player.unMute();
+                    }, 5400);
                 }
             }
 
