@@ -88,6 +88,7 @@
                         controls: 0,
                         playsinline: 1,
                         autoplay: 1,
+                        mute: 1,
                         fs: 0,
                     },
                 });
@@ -95,7 +96,7 @@
 
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.PLAYING && !_done) {
-                    // setTimeout(stopVideo, 6000);
+                    setTimeout(_player.unMute(), 1000);
                     _done = true;
                 }
             }
