@@ -65,8 +65,8 @@
             const _$btnYoutube = document.querySelector('.youtubeButton');
             const _$btnYoutubeStop = document.querySelector('.youtubeStop');
             const _$youtubeIframe = document.querySelector('.youtubePlayer');
-
             const _$scriptTag = document.createElement('script');
+            const _videoID = 'M7lc1UVf-VE';
 
             let _player;
             let _done = false;
@@ -76,7 +76,7 @@
                 _player = new YT.Player('player', {
                     height: '390',
                     width: '640',
-                    videoId: 'M7lc1UVf-VE',
+                    videoId: _videoID,
                     events: {
                         onStateChange: onPlayerStateChange,
                     },
