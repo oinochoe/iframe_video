@@ -37,73 +37,73 @@
                 height: 100%;
                 z-index: 1;
             }
+            .youtubeStop {
+                display: none;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
         </style>
     </head>
     <body>
         <div class="wrap">
             <div class="youtubeWrap">
                 <div class="youtubeButton"></div>
+                <div class="youtubeStop"></div>
                 <div class="youtubePlayer">
-                    <iframe
-                        width="560"
-                        height="315"
-                        src="https://www.youtube.com/embed/muSW5UcfstM"
-                        frameborder="0"
-                    ></iframe>
+                    <div id="player"></div>
                 </div>
             </div>
         </div>
-
-        <script id="forYoutubeApi">
+        <script src="https://www.youtube.com/iframe_api"></script>
+        <script>
             'use strict';
 
             const _$btnYoutube = document.querySelector('.youtubeButton');
+            const _$btnYoutubeStop = document.querySelector('.youtubeStop');
             const _$youtubeIframe = document.querySelector('.youtubePlayer');
 
-            let _$scriptTag = document.createElement('script');
-            let _$insertScript = document.getElementById('forYoutubeApi');
+            const _$scriptTag = document.createElement('script');
 
             let _player;
             let _done = false;
 
             // youtube api
             function onYouTubeIframeAPIReady() {
-                player = new YT.Player('player', {
+                _player = new YT.Player('player', {
                     height: '390',
                     width: '640',
                     videoId: 'M7lc1UVf-VE',
                     events: {
-                        onReady: onPlayerReady,
                         onStateChange: onPlayerStateChange,
                     },
                 });
             }
 
-            function onPlayerReady(event) {
-                event.target.playVideo();
-            }
-
             function onPlayerStateChange(event) {
-                if (event.data == YT.PlayerState.PLAYING && !done) {
-                    setTimeout(stopVideo, 6000);
-                    done = true;
+                if (event.data == YT.PlayerState.PLAYING && !_done) {
+                    // setTimeout(stopVideo, 6000);
+                    _done = true;
                 }
             }
 
             function stopVideo() {
-                player.stopVideo();
+                _player.stopVideo();
+                _$btnYoutube.style.display = 'block';
+                _$btnYoutubeStop.style.display = 'none';
             }
 
-            function youtubePlay() {
-                _$youtubeIframe.innerHTML = "<div id='player'></div>";
-                _$scriptTag.src = 'https://www.youtube.com/iframe_api';
-                _$insertScript.parentNode.insertBefore(
-                    _$scriptTag,
-                    _$insertScript,
-                );
+            function playVideo() {
+                _player.playVideo();
+                _$btnYoutube.style.display = 'none';
+                _$btnYoutubeStop.style.display = 'block';
             }
 
-            _$btnYoutube.addEventListener('touchstart', youtubePlay);
+            _$btnYoutube.addEventListener('click', playVideo);
+            _$btnYoutubeStop.addEventListener('click', stopVideo);
         </script>
     </body>
 </html>
