@@ -89,7 +89,6 @@
                         controls: 0,
                         playsinline: 1,
                         autoplay: 1,
-                        mute: 1,
                         fs: 0,
                     },
                 });
@@ -104,9 +103,6 @@
                     _done = true;
                     _$btnYoutube.style.display = 'none';
                     _$btnYoutubeStop.style.display = 'block';
-                    setTimeout(() => {
-                        _player.unMute();
-                    }, 5400);
                 }
             }
 
