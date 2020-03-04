@@ -44,15 +44,15 @@
             (function() {
                 const btnYoutube = document.querySelector('.youtubeButton');
                 const youtubeIframe = document.querySelector('.video');
-                let youtubeSwitch = 0;
 
                 function youtubePlay() {
-                    if (youtubeIframe !== null && youtubeSwitch == 0) {
-                        youtubeSwitch = 1;
+                    if (
+                        youtubeIframe !== null &&
+                        !youtubeIframe.getAttribute('src').includes('autoplay')
+                    ) {
                         youtubeIframe.src =
                             'https://www.youtube.com/embed/j7w0dmAHR6I?enablejsapi=1&controls=0&autoplay=1&fs=0&modestbranding=1&playsinline=1&rel=0';
                     } else {
-                        youtubeSwitch = 0;
                         youtubeIframe.src =
                             'https://www.youtube.com/embed/j7w0dmAHR6I';
                     }
