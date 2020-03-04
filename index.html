@@ -10,7 +10,10 @@
                 border: 0;
                 padding: 0;
             }
-            body {
+            .wrap {
+                width: 50%;
+            }
+            .youtubeWrap {
                 position: relative;
                 width: 100%;
                 padding-bottom: 56.25%;
@@ -30,15 +33,28 @@
                 height: 100%;
                 z-index: 1;
             }
+            /* log */
+            .log {
+                display: block;
+                margin: 30px;
+                color: #187690e3;
+                font-size: 30px;
+            }
         </style>
     </head>
     <body>
-        <div class="youtubeButton"></div>
-        <iframe
-            class="video"
-            src="https://www.youtube.com/embed/j7w0dmAHR6I"
-            frameborder="0"
-        ></iframe>
+        <div class="wrap">
+            <div class="youtubeWrap">
+                <div class="youtubeButton"></div>
+                <iframe
+                    class="video"
+                    src="https://www.youtube.com/embed/j7w0dmAHR6I"
+                    frameborder="0"
+                ></iframe>
+            </div>
+        </div>
+
+        <div class="log"></div>
 
         <script>
             (function() {
@@ -59,6 +75,34 @@
                 }
 
                 btnYoutube.addEventListener('click', youtubePlay);
+
+                // log
+                function formatDate(date) {
+                    let hours = date.getHours();
+                    let minutes = date.getMinutes();
+                    let seconds = date.getSeconds();
+                    let ampm = hours >= 12 ? 'pm' : 'am';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12;
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    let strTime =
+                        hours + ':' + minutes + ' ' + seconds + 's ' + ampm;
+                    return (
+                        date.getMonth() +
+                        1 +
+                        '/' +
+                        date.getDate() +
+                        '/' +
+                        date.getFullYear() +
+                        ' ' +
+                        strTime
+                    );
+                }
+
+                let date = new Date();
+                let dateFormat = formatDate(date);
+
+                document.querySelector('.log').innerHTML = 'log: ' + dateFormat;
             })();
         </script>
     </body>
