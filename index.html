@@ -96,8 +96,10 @@
 
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.PLAYING && !_done) {
-                    setTimeout(_player.unMute(), 1000);
                     _done = true;
+                    setTimeout(() => {
+                        _player.unMute();
+                    }, 5400);
                 }
             }
 
