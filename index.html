@@ -46,12 +46,31 @@
                 height: 100%;
                 z-index: 1;
             }
+            .youtubeButtonStop {
+                display: none;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 5;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+            }
+            .youtubeButtonStop.active {
+                display: flex;
+                opacity: 1;
+            }
         </style>
     </head>
     <body>
         <div class="wrap">
             <div class="youtubeWrap">
                 <div class="youtubeButton"></div>
+                <div class="youtubeButtonStop">
+                    <div style="width:100px; height:100px; background:black;"></div>
+                </div>
                 <div class="youtubeStop"></div>
                 <div class="youtubePlayer">
                     <div id="player"></div>
@@ -64,6 +83,8 @@
 
             const _$btnYoutube = document.querySelector('.youtubeButton');
             const _$btnYoutubeStop = document.querySelector('.youtubeStop');
+            const _$btnYoutubeStopButton = document.querySelector('.youtubeButtonStop');
+            const _$btnYoutubeStopHandler = document.querySelector('.youtubeButtonStop div');
             const _$youtubeIframe = document.querySelector('.youtubePlayer');
             const _$scriptTag = document.createElement('script');
             const _videoID = 'M7lc1UVf-VE';
@@ -110,6 +131,7 @@
                 _player.stopVideo();
                 _$btnYoutube.style.display = 'block';
                 _$btnYoutubeStop.style.display = 'none';
+                _$btnYoutubeStopButton.classList.remove('active');
             }
 
             function playVideo() {
@@ -118,8 +140,16 @@
                 _$btnYoutubeStop.style.display = 'block';
             }
 
+            function showStopButton() {
+                _$btnYoutubeStopButton.classList.add('active');
+                setTimeout(function() {
+                    _$btnYoutubeStopButton.classList.remove('active');
+                }, 2500);
+            }
+
             _$btnYoutube.addEventListener('click', playVideo);
-            _$btnYoutubeStop.addEventListener('click', stopVideo);
+            _$btnYoutubeStop.addEventListener('click', showStopButton);
+            _$btnYoutubeStopHandler.addEventListener('click', stopVideo);
         </script>
     </body>
 </html>
